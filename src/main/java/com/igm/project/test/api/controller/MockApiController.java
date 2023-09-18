@@ -21,7 +21,7 @@ public class MockApiController {
     if(hitCount == 2 || hitCount == 3){
       return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build();
     }
-    if(hitCount == 5){
+    if(hitCount == 6){
       hitCount = 1;
     }
     return ResponseEntity.ok().body(hitCount);
