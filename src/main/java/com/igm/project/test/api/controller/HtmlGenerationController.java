@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.igm.project.test.api.service.HtmlGenerationService;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
+ /**
+   * Controller for emulating a multiple thread task
+   */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/html_generation")
 public class HtmlGenerationController {
   
   private final HtmlGenerationService htmlGenerationService;
@@ -18,6 +20,9 @@ public class HtmlGenerationController {
     this.htmlGenerationService = htmlGenerationService;
   }
   
+  /**
+   * Generates a html file using multiple threads
+   */
   @GetMapping(value="/view")
   public ResponseEntity<String> getMethodName() {
       return ResponseEntity.ok().contentType(MediaType.TEXT_HTML).body(htmlGenerationService.generateCompleteHtml());
