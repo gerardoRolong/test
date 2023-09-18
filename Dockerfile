@@ -2,7 +2,7 @@
 FROM maven:3.8.1-openjdk-17 as build
 WORKDIR /app
 COPY . .
-RUN mvn clean package -X
+RUN mvn clean package
 
 # Stage 2: Run the application
 FROM openjdk:17-jdk-slim
