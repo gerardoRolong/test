@@ -1,43 +1,36 @@
 package com.igm.project.test.controller;
 
+import com.igm.project.test.api.controller.MockApiController;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import com.igm.project.test.api.controller.HtmlGenerationController;
-import com.igm.project.test.api.service.HtmlGenerationService;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.hamcrest.Matchers.*;
 
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc(addFilters = false)
-@WebMvcTest(HtmlGenerationController.class)
-public class HtmlGenerationControllerTest {
+@WebMvcTest(MockApiController.class)
+public class MockApiControllerTest {
   
   @Autowired
   private MockMvc mockMvc;
   
-  @MockBean
-  HtmlGenerationService htmlGenerationService;
-  
   @Test
-  public void testGetGeneratedHtml() throws Exception{
-    String html = """
-      <!DOCTYPE html>
-      <html>
-      </html>
-    """;
-    when(htmlGenerationService.generateCompleteHtml()).thenReturn(html);    
-    mockMvc.perform(get("/html_generation/view"))
+  public void testEmulatedApi() throws Exception{
+    
+    //testing for 2 consecutive calls, the second one should return 429
+    mockMvc.perform(get("/mock_api/hit_count"))
         .andExpect(status().isOk())
-        .andExpect(content().string(not(emptyOrNullString())));
+        .andExpect(content().string("1"));
+        
+    mockMvc.perform(get("/mock_api/hit_count"))
+        .andExpect(status().isTooManyRequests());    
   }
   
 }

@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.igm.project.test.api.service.HtmlGenerationService;
 import org.springframework.web.bind.annotation.GetMapping;
 
- /**
-   * Controller for emulating a multiple thread task
-   */
+/**
+ * Controller for emulating a multiple thread task
+ */
 @RestController
 @RequestMapping("/html_generation")
 public class HtmlGenerationController {
