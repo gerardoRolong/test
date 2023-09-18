@@ -1,5 +1,10 @@
 # Project with an endpoint to print a html file using multiple threads and other endpoint to test a custom annotation  
 
+# How To Run  
+- Clone the project and in the root directory of the project run: **docker build -t java_test .**  
+- Next run: **docker run -it --rm -p 8080:8080 --name java_test_container java_test**  
+- Then navigate to **localhost://8080** followed by one of the rutes named bellow  
+
 ## End point to generate the html:  
 /html_generation/view
 
